@@ -22,8 +22,7 @@ class AsistenciaController extends Controller
 
     public function index()
     {
-      $reuniones=asistencia::select('fecha_reunion')->orderBy('fecha_reunion', 'asc')->groupBy('fecha_reunion')->get();
-      $reuniones->last(10);
+      $reuniones=asistencia::select('fecha_reunion')->orderBy('fecha_reunion', 'asc')->groupBy('fecha_reunion')->take(10)->get();
       return view('asistencia/listar',compact('reuniones'));
     }
 
