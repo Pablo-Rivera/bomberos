@@ -1,13 +1,11 @@
 $(document).ready(function () {
   function cargarTabla(){
-    var monthSince=$('#monthSince').val();
-    var yearSince=$('#yearSince').val();
-    var monthUntil=$('#monthUntil').val();
-    var yearUntil=$('#yearUntil').val();
+    var mes=$('#mes').val();
+    var año=$('#año').val();
 		$.ajax({
 			type: 'GET',
 			dataType: 'HTML',
-			url: '../servicio/'+monthSince+'/'+yearSince+'/'+monthUntil+'/'+yearUntil+'/tabla',
+			url: '../servicio/'+mes+'/'+año+'/tabla',
 			success: function(data){
 						$('#estadistica').html(data);
 					},
@@ -17,22 +15,12 @@ $(document).ready(function () {
 		});
   };
 
-  $('#monthSince').on('change',function(){
+  $('#mes').on('change',function(){
     cargarTabla();
   });
 
-  $('#yearSince').on('change',function(){
+  $('#año').on('change',function(){
     cargarTabla();
   });
-
-  $('#monthUntil').on('change',function(){
-    cargarTabla();
-  });
-
-  $('#yearUntil').on('change',function(){
-    cargarTabla();
-  });
-
-
   cargarTabla();
 });

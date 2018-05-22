@@ -91,17 +91,7 @@
                     {{ Auth::user()->nombre }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>
-                      <a href="{{ route('logout') }}"
-                          onclick="event.preventDefault();
-                                   document.getElementById('logout-form').submit();">
-                          <i class="glyphicon glyphicon-log-out"></i> Salir
-                      </a>
-
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                          {{ csrf_field() }}
-                      </form>
-                    </li>
+                    <li><a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-log-out"></i> Salir</a></li>
                 </ul>
             </li>
         @endif
@@ -137,6 +127,7 @@
             @endif
             <a  href="{{route('puntuacion.index')}}"  class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Listar</a>
             <a  href="{{route('puntuacion.anual')}}"  class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Listado anual</a>
+            <a  href="{{route('puntuacion.variables')}}"  class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Modificar valores</a>
           </div>
 
           <a href="#serviciosSubMenu" id="servicioMenu" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><i class="fa fa-cog fa-lg" style="padding-right: 10px;"></i>  Servicios<span class="arrow"></span></a>
@@ -161,32 +152,13 @@
             @endif
           </div>
 
-          <a href="#reemplazosSubMenu" id="reempladoMenu" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><i class="fa fa-exchange fa-lg" style="padding-right: 10px;"></i> Reemplazos<span class="arrow"></span></a>
-          <div class="collapse" id="reemplazosSubMenu">
-            <a href="{{route('reemplazo.index')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Lista de reemplazos</a>
-            @if (Auth::user()->admin)
-              <a href="{{route('reemplazo.create')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Alta reemplazo</a>
-            @endif
-          </div>
-
           @if (Auth::user()->admin)
           <a href="#usuariosSubMenu" id="usuarioMenu" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><i class="fa fa-id-badge fa-lg" style="padding-right: 10px;"></i> Usuarios<span class="arrow"></span></a>
           <div class="collapse" id="usuariosSubMenu">
-            <a href="{{route('usuario.create')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Alta usuario</a>
-            <a href="{{route('usuario.index')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Lista de usuarios</a>
-            <a href="{{route('usuario.permisos')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Permisos de usuarios</a>
+            <a href="{{route('bombero.permisos')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Permisos de usuarios</a>
           </div>
           @endif
-
-        <a href="#variablesSubMenu" id="variableMenu" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><i class="fa fa-pie-chart  " style="padding-right: 10px;"></i> Variables<span class="arrow"></span></a>
-        <div class="collapse" id="variablesSubMenu">
-          <a href="{{route('variable.index')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Listar variables</a>
-          @if (Auth::user()->admin)
-            <a href="{{route('variable.create')}}" class="list-group-item"><i class="fa fa-angle-double-right fa-md"></i> Alta variable</a>
-          @endif
         </div>
-      </div>
-
       </div>
       <div class="right-panel col-sm-10 col-xs-12">
     @else
@@ -197,7 +169,8 @@
       {!!HTML::script('assets/js/jquery.js')!!}
       {!!HTML::script('assets/js/bootstrap.js')!!}
       {!!HTML::script('assets/js/bootstrap-multiselect.js')!!}
-      {!!HTML::script('assets/js/script.js')!!}      
+      {!!HTML::script('assets/js/script.js')!!}
+      {!!HTML::script('assets/js/ajaxIngreso.js')!!}
       {!! Html::script('assets/js/bootstrap-toggle.js') !!}
     @yield('js')
     <!-- JavaScripts -->

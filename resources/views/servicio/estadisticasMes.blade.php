@@ -182,7 +182,7 @@
           <th class="text-center">{{count($servicios)}}</th>
       </tr>
       <tr>
-        <td class="text-center" colspan="28"> Estadísticas período desde {{config('selects.meses')[$monthSince].' - '.$yearSince}} hasta {{config('selects.meses')[$monthUntil].' - '.$yearUntil}}</td>
+        <td class="text-center" colspan="28"> Estadisticas de {{config('selects.meses')[$mes].' - '.$año}}</td>
       </tr>
   </tfoot>
   <br>
@@ -214,6 +214,4 @@
 </div>
 {{-- Fin --}}
 
-@section('js')
-	<script src="assets/js/ajaxmodal.js" type="text/javascript"></script>
-@endsection
+{!! Html::script('assets/js/ajaxmodal.js') !!}

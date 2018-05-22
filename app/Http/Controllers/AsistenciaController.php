@@ -22,18 +22,18 @@ class AsistenciaController extends Controller
 
     public function index()
     {
-      $reuniones=asistencia::select('fecha_reunion')->orderBy('fecha_reunion', 'asc')->groupBy('fecha_reunion')->limit(10)->get();
+      $reuniones=asistencia::select('fecha_reunion')->orderBy('fecha_reunion', 'desc')->groupBy('fecha_reunion')->limit(10)->get();
       return view('asistencia/listar',compact('reuniones'));
     }
 
     public function rango(AsistenciaRequest $request)
     {
       if(Auth::user()->admin){
-        list($dia, $month, $year) = explode('/', $request['inicio']);
-        $request['inicio']=$year.'-'.$month.'-'.$dia;
-        list($dia, $month, $year) = explode('/', $request['fin']);
-        $request['fin']=$year.'-'.$month.'-'.$dia;
-        $reuniones=asistencia::select('fecha_reunion')->orderBy('fecha_reunion', 'asc')->groupBy('fecha_reunion')->having('fecha_reunion','>=', $request['inicio'])->having('fecha_reunion','<=', $request['fin'])->limit(10)->get();
+        list($dia, $mes, $año) = explode('/', $request['inicio']);
+        $request['inicio']=$año.'-'.$mes.'-'.$dia;
+        list($dia, $mes, $año) = explode('/', $request['fin']);
+        $request['fin']=$año.'-'.$mes.'-'.$dia;
+        $reuniones=asistencia::select('fecha_reunion')->orderBy('fecha_reunion', 'asc')->groupBy('fecha_reunion')->having('fecha_reunion','>=', $request['inicio'])->having('fecha_reunion','<=', $request['fin'])->get();
          return view('asistencia/listar',compact('reuniones'));
       }
       return view('auth/alerta');
@@ -52,8 +52,8 @@ class AsistenciaController extends Controller
     {
       if(Auth::user()->admin){
         $data=$request->all();
-        list($dia, $month, $year) = explode('/', $data['fecha_reunion']);
-        $data['fecha_reunion']=$year.'-'.$month.'-'.$dia;
+        list($dia, $mes, $año) = explode('/', $data['fecha_reunion']);
+        $data['fecha_reunion']=$año.'-'.$mes.'-'.$dia;
         foreach ($data as $key => $value) {
           if (strstr($key, '-', true)=="bombero") {
             $idbombero=substr($key, 8);

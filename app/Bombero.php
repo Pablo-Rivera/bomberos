@@ -84,12 +84,12 @@ class Bombero extends Model
     return $this->hasMany(asistencia::class,"id_bombero","id")->where('fecha_reunion',$reunion)->count();
   }
 
-  public function accidentales($month,$year){
+  public function accidentales($mes,$año){
     $servicios=$this->serviciosAsistidos;
     foreach ($servicios as $key => $servicio) {
       if (!($servicio->servicio->tipo_alarma==3 &&
-       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$servicio->servicio->hora_alarma)->format('m')==$month ) &&
-       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$servicio->servicio->hora_alarma)->format('Y')==$year)))
+       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$servicio->servicio->hora_alarma)->format('m')==$mes ) &&
+       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$servicio->servicio->hora_alarma)->format('Y')==$año)))
       {
         unset($servicios[$key]);
       }
@@ -97,12 +97,12 @@ class Bombero extends Model
     return $servicios->count();
   }
 
-  public function guardias($month,$year){
+  public function guardias($mes,$año){
     $guardias=BomberoServicio::where('bombero_id',$this->id)->where('tipo_id','<',6)->get();
     foreach ($guardias as $key => $guardia) {
       if (!($guardia->servicio->tipo_alarma<3 &&
-       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$guardia->servicio->hora_alarma)->format('m')==$month ) &&
-       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$guardia->servicio->hora_alarma)->format('Y')==$year)))
+       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$guardia->servicio->hora_alarma)->format('m')==$mes ) &&
+       (\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$guardia->servicio->hora_alarma)->format('Y')==$año)))
       {
         unset($guardias[$key]);
       }
@@ -110,16 +110,16 @@ class Bombero extends Model
     return $guardias->count();
   }
 
-  public function puntuo($month,$year){
-    return $this->hasMany(Puntuacion::class,"id_bombero","id")->whereYear('fecha','=',$year)->whereMonth('fecha','=',$month)->count()>0;
+  public function puntuo($mes,$año){
+    return $this->hasMany(Puntuacion::class,"id_bombero","id")->whereYear('fecha','=',$año)->whereMonth('fecha','=',$mes)->count()>0;
   }
 
-  public function puntuacion($month,$year){
-    return $this->hasMany(Puntuacion::class,"id_bombero","id")->whereYear('fecha','=',$year)->whereMonth('fecha','=',$month)->first();
+  public function puntuacion($mes,$año){
+    return $this->hasMany(Puntuacion::class,"id_bombero","id")->whereYear('fecha','=',$año)->whereMonth('fecha','=',$mes)->first();
   }
 
-  public function asistenciasmes($month,$year){
-    return $this->hasMany(asistencia::class,"id_bombero","id")->whereYear('fecha_reunion','=',$year)->whereMonth('fecha_reunion','=',$month)->count();
+  public function asistenciasmes($mes,$año){
+    return $this->hasMany(asistencia::class,"id_bombero","id")->whereYear('fecha_reunion','=',$año)->whereMonth('fecha_reunion','=',$mes)->count();
   }
 
   public function ingresado(){

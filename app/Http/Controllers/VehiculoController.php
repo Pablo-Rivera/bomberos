@@ -18,8 +18,7 @@ class VehiculoController extends Controller
   }
   public function index(VehiculoRequest $request)
   {
-      $vehiculos=Vehiculo::movil($request['num_movil'])->estado($request['estado'])->patente($request['patente'])->paginate(8);
-      $request->flashOnly('patente','num_movil','estado');
+      $vehiculos=Vehiculo::movil($request['movil'])->estado($request['estado'])->patente($request['patente'])->paginate(8);
       return view('vehiculo/lista',compact('vehiculos'));
   }
   public function create()
@@ -52,7 +51,6 @@ class VehiculoController extends Controller
       }
       return redirect()->route('vehiculo.index');
     }
-    return view('auth/alerta');
   }
   public function update(VehiculoRequest $data, $id)
   {
@@ -63,7 +61,6 @@ class VehiculoController extends Controller
       $vehiculo=Vehiculo::findorfail($id)->update($data->all());
       return redirect()->route('vehiculo.index');
     }
-    return view('auth/alerta');
   }
 
   public function store(VehiculoRequest $data)
@@ -75,6 +72,6 @@ class VehiculoController extends Controller
       Vehiculo::create($data->all());
       return redirect()->route('vehiculo.index');
     }
-    return view('auth/alerta');
   }
+
 }

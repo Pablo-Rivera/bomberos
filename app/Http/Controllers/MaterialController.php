@@ -79,6 +79,7 @@ class MaterialController extends Controller
         return redirect()->route('material.index');
       }
   }
+
   public function update(MaterialRequest $data, $id)
   {
       if(Auth::user()->admin){
@@ -98,6 +99,7 @@ class MaterialController extends Controller
         return redirect()->route('material.index');
       }
   }
+
   public function store(MaterialRequest $data)
   {
       if(Auth::user()->admin){
@@ -108,4 +110,5 @@ class MaterialController extends Controller
         return redirect()->route('material.index');
       }
   }
+
 }
