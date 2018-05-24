@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-dd($bombero->servicios);
 <article class="col-sm-12">
   <div class="panel panel-default">
     <div id="breadcrumb" class="panel-heading">
