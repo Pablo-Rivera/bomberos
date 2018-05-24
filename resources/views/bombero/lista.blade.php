@@ -56,14 +56,8 @@
                 <td><a href="{{ route('bombero.edit', $bombero->id) }}" class="glyphicon glyphicon-edit"></a></td>
                 <td>
 
-                  @if (count($bombero->servicios)==0)
-                    {{ Form::open(['route' => ['bombero.destroy', $bombero->id], 'method' => 'DELETE']) }}
-                        <button type="submit" class="glyphicon glyphicon-trash"></button>
-                    {{ Form::close() }}
-                  @else
                     <button type="submit" class="glyphicon glyphicon-ban-circle" title="Imposible eliminar, participo en al menos un servicio"></button>
 
-                  @endif
                 </td>
               @else
                 <td colspan="2">

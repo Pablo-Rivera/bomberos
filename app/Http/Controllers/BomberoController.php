@@ -25,7 +25,6 @@ class BomberoController extends Controller
   {
       $bomberos=Bombero::legajo($request['legajo'])->nombre($request['nombre'])
       ->jerarquia($request['jerarquia'])->paginate(12);
-          dd("gato");
       return view('bombero/lista',compact('bomberos'));
   }
 
