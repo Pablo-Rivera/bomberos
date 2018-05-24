@@ -55,6 +55,7 @@
               @if (Auth::user()->admin)
                 <td><a href="{{ route('bombero.edit', $bombero->id) }}" class="glyphicon glyphicon-edit"></a></td>
                 <td>
+                  dd(count($bombero->servicios));
                   @if (count($bombero->servicios)==0)
                     {{ Form::open(['route' => ['bombero.destroy', $bombero->id], 'method' => 'DELETE']) }}
                         <button type="submit" class="glyphicon glyphicon-trash"></button>
